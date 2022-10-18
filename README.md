@@ -8,7 +8,7 @@
 
 # 🎉 Preview in the Web
 
-
+https://user-images.githubusercontent.com/83084631/196461890-1b4e5ae1-edb2-496a-9f92-f7bec9596350.mp4
 
 ---
 
@@ -39,9 +39,9 @@ Desafio feito pela XLAND de um controle de Estoque.
   yarn ou npm install
 
   ##Rode esse comando no seu terminal
-  docker run -d --name postgres -e POSTGRES_PASSWORD=elefante -p 5432:5432 postgres
+  docker run -d --name seunomeBanco -e POSTGRES_PASSWORD=suasenhaBanco -p 5432:5432 postgres
 
-  ##crie um .env, onde estão SENHADOBANCO e NOMEDOBANCO coloque oque foi colocado acima
+  ##crie um .env, onde estão SENHADOBANCO e NOMEDOBANCO escreva oque foi colocado acima
   DATABASE_URL="postgresql://postgres:SENHADOBANCO@localhost:5432/NOMEDOBANCO?schema=public"
 
   ##Rodar as migrations
