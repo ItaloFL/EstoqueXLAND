@@ -11,6 +11,7 @@ export function CreateProduct() {
   const [image, setImage] = useState<any>()
   const [price, setPrice] = useState('')
   const [quantEstoque, setquantEstoque] = useState('')
+  const [open, setOpen] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -30,13 +31,19 @@ export function CreateProduct() {
       const product = await axios.post('http://localhost:3333/product', data)
 
       setIsLoading(false)
+      setOpen(false)
     } catch (error) {}
   }
 
   return (
     <div className="flex items-center justify-center">
-      <Dialog.Root>
-        <Dialog.Trigger className="flex items-center justify-center w-[40px] h-[40px] rounded-full bg-blue-350 hover:bg-blue-250 hover:scale-110 duration-300">
+      <Dialog.Root open={open}>
+        <Dialog.Trigger
+          onClick={() => {
+            setOpen(true)
+          }}
+          className="flex items-center justify-center w-[40px] h-[40px] rounded-full bg-blue-350 hover:bg-blue-250 hover:scale-110 duration-300"
+        >
           <Plus color="#000" weight="bold" />
         </Dialog.Trigger>
         <Dialog.Portal className="">
@@ -123,7 +130,7 @@ export function CreateProduct() {
                   />
                 </TextInput.Root>
               </div>
-              <Button children="Enviar" />
+              <Button onClick={() => setOpen(false)} children="Enviar" />
             </form>
           </Dialog.Content>
         </Dialog.Portal>
