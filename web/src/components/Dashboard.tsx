@@ -12,7 +12,7 @@ import { DotsThreeOutlineVertical, Pencil, Trash, X } from 'phosphor-react'
 import jwtdecode from 'jwt-decode'
 import { TextInput } from './Input'
 import { Button } from './Button'
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 
 type PayLoad = {
   id: string
@@ -31,9 +31,10 @@ type ProductsType = {
 export function Dashboard() {
   const navigate = useNavigate()
   const [products, setProducts] = useState<ProductsType[]>([])
-  const [quantEstoque, setQuantEstoque] = useState('')
+  const [quantEstoque, setQuantEstoque] = useState<number>(0)
   const [isAdmin, setIsAdmin] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [open, setOpen] = useState(false)
 
   async function handleDelete(id: string) {
     const token = localStorage.getItem('token')
@@ -47,11 +48,20 @@ export function Dashboard() {
   async function handleEditProduct(id: string, event: FormEvent) {
     event.preventDefault()
 
+    if (quantEstoque) {
+    }
+
+    console.log(quantEstoque)
+
     axios
       .put(`http://localhost:3333/product/${id}`, {
         quantEstoque
       })
-      .then(res => {})
+      .then(res => {
+        res.data
+        toast.success('Produto editado com sucesso')
+      })
+      .catch(error => toast.error(error.response.data.message))
   }
 
   useEffect(() => {
@@ -119,7 +129,7 @@ export function Dashboard() {
                         </Popover.Trigger>
                         <Popover.Portal>
                           <Popover.Content className="flex flex-col bg-red items-center justify-center w-[120px] h-[120px] bg-zinc-800">
-                            <Dialog.Root>
+                            <Dialog.Root open={open} onOpenChange={setOpen}>
                               <Dialog.Trigger className="flex items-center justify-center p-2 text-white gap-2 delay-75 hover:bg-[#212124]">
                                 <Pencil
                                   className="text-blue-350 "
@@ -134,19 +144,23 @@ export function Dashboard() {
                                     Digite a quantidade de produtos vendidos
                                   </div>
                                   <form
-                                    onSubmit={e => {
-                                      handleEditProduct(product.id, e)
-                                    }}
+                                    onSubmit={async e =>
+                                      handleEditProduct(product.id, e).then(
+                                        () => setOpen(false)
+                                      )
+                                    }
                                     className="flex flex-col gap-9 items-center justify-center"
                                   >
                                     <TextInput.Root>
                                       <TextInput.Input
-                                        type="text"
+                                        type="number"
                                         id="quantEstoque"
                                         name="quantEstoque"
                                         placeholder="Ex: 9"
                                         onChange={e =>
-                                          setQuantEstoque(e.target.value)
+                                          setQuantEstoque(
+                                            Number(e.target.value)
+                                          )
                                         }
                                       />
                                     </TextInput.Root>
@@ -190,6 +204,7 @@ export function Dashboard() {
             ))}
           </ul>
         )}
+        <ToastContainer />
       </div>
     </>
   )

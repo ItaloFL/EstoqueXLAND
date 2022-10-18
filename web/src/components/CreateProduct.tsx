@@ -11,6 +11,7 @@ export function CreateProduct() {
   const [image, setImage] = useState<any>()
   const [price, setPrice] = useState('')
   const [quantEstoque, setquantEstoque] = useState('')
+  const [open, setOpen] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -35,14 +36,20 @@ export function CreateProduct() {
 
   return (
     <div className="flex items-center justify-center">
-      <Dialog.Root>
+      <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger className="flex items-center justify-center w-[40px] h-[40px] rounded-full bg-blue-350 hover:bg-blue-250 hover:scale-110 duration-300">
           <Plus color="#000" weight="bold" />
         </Dialog.Trigger>
         <Dialog.Portal className="">
           <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
           <Dialog.Content className="fixed bg-[#202024] py-8 px-10 text-white top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-lg w-[480px] shadow-lg shadow-black/25">
-            <form action="" className="ml-7" onSubmit={handleSubmit}>
+            <form
+              action=""
+              className="ml-7"
+              onSubmit={async (e) => {
+                handleSubmit(e).then(() => setOpen(false))
+              }}
+            >
               <div className="">
                 <label htmlFor="image">Escolha sua imagem</label>
               </div>
@@ -123,7 +130,7 @@ export function CreateProduct() {
                   />
                 </TextInput.Root>
               </div>
-              <Button children="Enviar" />
+              <Button type="submit" children="Enviar" />
             </form>
           </Dialog.Content>
         </Dialog.Portal>
