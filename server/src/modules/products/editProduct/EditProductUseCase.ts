@@ -11,6 +11,8 @@ export class EditProductUseCase {
 
     if (!verifyIfProductExist) throw new AppError('Produto não encontrado')
 
+    if (quantEstoque <= 0) throw new AppError('Digite um numero maior que zero')
+
     if (verifyIfProductExist.quantEstoque < quantEstoque)
       throw new AppError('Quantidade de produtos insuficiente')
 
