@@ -44,7 +44,7 @@ Desafio feito pela XLAND de um controle de Estoque.
   ##Rode esse comando no seu terminal
   docker run -d --name seunomeBanco -e POSTGRES_PASSWORD=suasenhaBanco -p 5432:5432 postgres
 
-  ##crie um .env, onde estão SENHADOBANCO e NOMEDOBANCO escreva oque foi colocado acima
+  ##crie um .env dentro de server, onde estão SENHADOBANCO e NOMEDOBANCO escreva oque foi colocado acima
   DATABASE_URL="postgresql://postgres:SENHADOBANCO@localhost:5432/NOMEDOBANCO?schema=public"
 
   ##Rodar as migrations
