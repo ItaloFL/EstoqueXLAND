@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom'
 export function Login() {
   const navigate = useNavigate()
   const ref = useRef<HTMLInputElement>(null)
-  
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -84,6 +84,7 @@ export function Login() {
               <LockSimple weight="fill" color="#00B4CC" />
             </TextInput.Icon>
             <TextInput.Input
+              type="password"
               placeholder="Password"
               id="password"
               name="password"
