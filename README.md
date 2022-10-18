@@ -32,6 +32,9 @@ Desafio feito pela XLAND de um controle de Estoque.
 
 ```bash
 
+  ##Clone o repositorio
+  git clone https://github.com/ItaloFL/EstoqueXLAND.git && cd EstoqueXLAND
+  
   ##Primeiro a configuração do container docker para o banco prisma
   cd server
 
